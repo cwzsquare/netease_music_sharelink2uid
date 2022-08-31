@@ -1,0 +1,2 @@
+# netease_music_sharelink2uid
+从网易云音乐的分享链接中获取分享者的用户信息
