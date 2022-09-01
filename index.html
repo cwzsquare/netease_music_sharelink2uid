@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+        function decode_uct(uct) {
+            let uct_parse = decodeURIComponent(uct)
+            const key = 'y6oV5go8h5Vg31dSetYA3V1dZ2JGG3WF';
+            let key_parse = CryptoJS.enc.Utf8.parse(key);
+            let uid_bytes = CryptoJS.AES.decrypt(uct_parse, key_parse, { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 });
+            return uid_bytes.toString(CryptoJS.enc.Utf8);
+        }
+
+        function parse_uct(url) {
+            let reg = new RegExp("(^|&)" + "uct" + "=([^&]*)(&|$)", "i");
+            let r = url.match(reg);
+            if (r != null) {
+                return r[2];
+            };
+            return null;
+        }
+
+        function Decode(url) {
+            return decode_uct(parse_uct(url));
+        }
+    </script>
+    <script>
+        function Output() {
+            const home_page_prefix = "https://music.163.com/#/user/home?id=";
+            let url = document.getElementById("0xdeadbeef").value;
+            let uid = Decode(url);
+            if(uid == null || uid.length == 0){
+                console.log("parse error");
+            }
+            else{
+                console.log(home_page_prefix + uid);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <form>
+        输入网易云分享链接：
+        <input type="text" name="shared-link" id="0xdeadbeef">
+    </form>
+    <button type="button" onclick="Output()">解析</button>
+    <br>
+    <noscript>抱歉，你的浏览器不支持 JavaScript!</noscript>
+</body>
