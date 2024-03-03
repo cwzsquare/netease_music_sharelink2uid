@@ -1,5 +1,10 @@
 # netease_music_sharelink2uid
 从网易云音乐的分享链接中获取分享者的用户信息 | Find NetEase CloudMusic User
+
+---
+针对uct2参数解析的新re工程，由于ncm.apk使用**ProGuard混淆**导致推进缓慢，望见谅；如有从其他架构平台针对ncm的re工作可供指导，欢迎提交issue或直接pull request。
+
+---
 ## 为啥要做？
 启发自v2ex的一篇[通过网易云音乐分享链接找到分享用户主页](https://www.v2ex.com/t/876017)，发现作者建了一个站[Find NetEase CloudMusic User](https://findneteasecloudmusicuser.nclgclub.com/)，但是解析不是用纯js，直接和后端交互的……真不符合开放精神。
 
